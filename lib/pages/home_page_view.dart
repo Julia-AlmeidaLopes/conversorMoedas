@@ -1,7 +1,54 @@
 import 'package:conv_de_moedas/widgets/app_textfield.dart';
 import 'package:flutter/material.dart';
 
-class HomePageView extends StatelessWidget {
+class HomePageView extends StatefulWidget {
+
+  @override
+  _HomePageViewState createState() => _HomePageViewState();
+}
+
+class _HomePageViewState extends State<HomePageView> {
+
+  final realController = TextEditingController();
+
+  final dolarController = TextEditingController();
+
+  final euroController = TextEditingController();
+
+  final bitCoinController = TextEditingController();
+
+  double dolar = 5.19;
+  double euro = 6.12;
+  double bitcoin = 56939.83;
+
+  void _realChange(String text){
+    double real = double.parse(text);
+    dolarController.text = (real/dolar).toStringAsFixed(2);
+    euroController.text = (real/euro).toStringAsFixed(2);
+    bitCoinController.text = (real/bitcoin).toStringAsFixed(5);      
+  }
+
+  void _dolarChange(String text){
+    double dolar = double.parse(text);
+    realController.text = (dolar * this.dolar).toStringAsFixed(2);
+    euroController.text = (dolar * this.dolar / euro).toStringAsFixed(2);
+    bitCoinController.text = (dolar * this.dolar/bitcoin).toStringAsFixed(5);
+  }
+
+  void _euroChange(String text){
+    double euro = double.parse(text);
+    realController.text = (euro * this.euro).toStringAsFixed(2);
+    dolarController.text = (euro * this.euro / dolar).toStringAsFixed(2);
+    bitCoinController.text = (euro * this.euro / bitcoin).toStringAsFixed(5);
+  }
+
+  void _bitcoinChange(String text){
+    double bitcoin = double.parse(text);
+    realController.text = (bitcoin * this.bitcoin).toStringAsFixed(2);
+    dolarController.text = (bitcoin * this.bitcoin / dolar).toStringAsFixed(2);
+    euroController.text = (bitcoin * this.bitcoin / euro).toStringAsFixed(2);
+  }
+
   @override
   Widget build(BuildContext context) {
     return SingleChildScrollView(
@@ -17,51 +64,13 @@ class HomePageView extends StatelessWidget {
               color: Colors.amber,
             ),
           ),
-            AppTextField("Real", "R\$ ", controller: TextEditingController(), moeda: (String text){double real = double.parse(text);}, tipo: TextInputType.number,),
+            AppTextField("Real", "R\$ ", controller: realController, moeda: _realChange, tipo: TextInputType.number,),
             SizedBox(height: 13),
-            AppTextField("Dolar", "US\$ ", controller: TextEditingController(), moeda: (String text){print(text);}, tipo: TextInputType.number,),
+            AppTextField("Dolar", "US\$ ", controller: dolarController, moeda: _dolarChange, tipo: TextInputType.number,),
             SizedBox(height: 13),
-            AppTextField("Euro", "€ ", controller: TextEditingController(), moeda: (String text){print(text);}, tipo: TextInputType.number,),
+            AppTextField("Euro", "€ ", controller: euroController, moeda: _euroChange, tipo: TextInputType.number,),
             SizedBox(height: 13),
-            AppTextField("Bitcoin", "฿ ", controller: TextEditingController(), moeda: (String text){print(text);}, tipo: TextInputType.number,),
-            /*decoration: InputDecoration(
-              labelText: "Real",
-              labelStyle: TextStyle(color: Colors.amber, fontSize: 23),
-              border: OutlineInputBorder(borderRadius: BorderRadius.circular(11)),
-              prefixText: "R\$ "
-            ),
-            textAlign: TextAlign.start,
-            style: TextStyle(color: Colors.white, fontSize: 19),
-          ),
-           TextField(
-            decoration: InputDecoration(
-              labelText: "Dolar",
-              labelStyle: TextStyle(color: Colors.amber, fontSize: 23),
-              border: OutlineInputBorder(borderRadius: BorderRadius.circular(11)),
-              prefixText: "US\$ "
-            ),
-            textAlign: TextAlign.start,
-            style: TextStyle(color: Colors.white, fontSize: 19),
-          ),
-           TextField(
-            decoration: InputDecoration(
-              labelText: "Euro",
-              labelStyle: TextStyle(color: Colors.amber, fontSize: 23),
-              border: OutlineInputBorder(borderRadius: BorderRadius.circular(11)),
-              prefixText: "€ "
-            ),
-            textAlign: TextAlign.start,
-            style: TextStyle(color: Colors.white, fontSize: 19),
-          ),
-           TextField(
-            decoration: InputDecoration(
-              labelText: "Bitcoin",
-              labelStyle: TextStyle(color: Colors.amber, fontSize: 23),
-              border: OutlineInputBorder(borderRadius: BorderRadius.circular(11)),
-              prefixText: "฿ "
-            ),
-            textAlign: TextAlign.start,
-            style: TextStyle(color: Colors.white, fontSize: 19),*/
+            AppTextField("Bitcoin", "฿ ", controller: bitCoinController, moeda: _bitcoinChange, tipo: TextInputType.number,),
         ]
       ),
     );

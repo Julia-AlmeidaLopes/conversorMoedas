@@ -53,7 +53,10 @@ Future<Map> chamadaApi() async{
           }
         },
       );
-      
+      /*void real (String text){
+        double real = double.parse(text);
+
+      }*/
     
   }
 }

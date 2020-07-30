@@ -10,9 +10,9 @@ class AppTextField extends StatelessWidget {
   AppTextField(
     this.label, 
     this.simbolo,
-    
     {this.controller, this.moeda, this.tipo}
   );
+
   @override
   Widget build(BuildContext context) {
     return TextField(
@@ -24,14 +24,13 @@ class AppTextField extends StatelessWidget {
         color: Colors.white
       ),
       textAlign: TextAlign.start,
-
+      
       decoration: InputDecoration(
         labelText: label,
         labelStyle: TextStyle(color: Colors.amber, fontSize: 23),
         border: OutlineInputBorder(borderRadius: BorderRadius.circular(11)),
         prefixText: simbolo,
       ),
-            
      
     );
   }
